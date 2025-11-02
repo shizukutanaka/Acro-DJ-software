@@ -1,0 +1,32 @@
+# Acro DJ Mixer Test Configuration
+
+version = "2.5.0"
+config_version = 1
+
+log_level = "DEBUG"
+log_json = false
+
+[audio]
+# Lower sample rate for faster tests
+sample_rate = 22050
+buffer_size = 512
+latency = 0.05
+
+[effects]
+enable_reverb = true
+enable_delay = true
+enable_filter = true
+
+[midi]
+enabled = false
+auto_connect = false
+
+[ui]
+theme = "dark"
+language = "en"
+window_width = 800
+window_height = 600
+
+[library]
+auto_scan = false
+scan_recursive = false

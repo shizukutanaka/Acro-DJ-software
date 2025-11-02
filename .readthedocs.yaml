@@ -1,0 +1,65 @@
+# Read the Docs configuration file for Acro DJ Mixer
+
+version: 2
+
+build:
+  os: ubuntu-22.04
+  tools:
+    python: "3.11"
+    pip: "24.0"
+
+python:
+  version: 3.11
+  install:
+    - requirements: docs/requirements.txt
+    - method: pip
+      path: .
+      extra: docs
+
+sphinx:
+  configuration: docs/conf.py
+  fail_on_warning: false
+  keep_warnings: true
+
+formats:
+  - pdf
+  - epub
+
+# Environment variables
+env:
+  PYTHONUNBUFFERED: 1
+
+# Build jobs
+jobs:
+  post_build:
+    - mkdir -p $READTHEDOCS_OUTPUT/html/.nojekyll
+
+# Redirects
+redirects:
+  docs/old.rst: /path/to/new.rst
+
+# Project-specific settings
+preview:
+  enabled: true
+
+search:
+  enabled: true
+
+submodules:
+  include: all
+  recursive: true
+  exclude:
+    - tests
+    - examples
+
+defaults:
+  mkdocs:
+    configuration: mkdocs.yml
+  sphinx:
+    builder: html
+    configuration: docs/conf.py
+    fail_on_warning: false
+
+# Enable notifications
+notifications:
+  enabled: false

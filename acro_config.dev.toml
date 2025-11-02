@@ -1,0 +1,33 @@
+# Acro DJ Mixer Development Configuration
+
+version = "2.5.0"
+config_version = 1
+
+log_level = "DEBUG"
+log_json = false
+log_file = "logs/acro_dev.log"
+
+[audio]
+# Larger buffer for stability during development
+buffer_size = 4096
+sample_rate = 44100
+latency = 0.10
+
+[effects]
+enable_reverb = true
+enable_delay = true
+enable_filter = true
+
+[midi]
+enabled = true
+auto_connect = true
+
+[ui]
+theme = "dark"
+language = "en"
+window_width = 1400
+window_height = 900
+
+[library]
+auto_scan = true
+scan_recursive = true

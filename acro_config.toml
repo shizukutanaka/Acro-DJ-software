@@ -1,0 +1,147 @@
+# Acro DJ Mixer Configuration
+# Production Configuration File
+#
+# This is the default configuration for Acro DJ Mixer v2.5.0
+# Environment variables can override these settings using nested syntax:
+#   ACRO_AUDIO__SAMPLE_RATE=48000
+#   ACRO_UI__THEME=light
+#
+# For environment-specific configs, create:
+#   acro_config.dev.toml   - Development settings
+#   acro_config.test.toml  - Testing settings
+#   acro_config.prod.toml  - Production settings
+
+version = "2.5.0"
+config_version = 1
+
+# Logging Configuration
+log_level = "INFO"
+log_json = false
+# log_file = "logs/acro.log"  # Uncomment to enable file logging
+
+# ============================================================================
+# AUDIO CONFIGURATION
+# ============================================================================
+# Audio hardware and processing settings
+[audio]
+
+# Sample rate in Hz (supported: 8000-192000, typical: 44100 or 48000)
+sample_rate = 44100
+
+# Audio buffer size in frames (must be power of 2)
+# Smaller = lower latency, larger = more stable
+# Common values: 128, 256, 512, 1024, 2048, 4096, 8192
+buffer_size = 2048
+
+# Number of audio channels (1 = mono, 2 = stereo)
+channels = 2
+
+# Audio device name (leave commented for auto-detection)
+# To see available devices:
+#   python -c "import sounddevice; print(sounddevice.query_devices())"
+# device_name = "default"
+
+# Target audio latency in seconds (balance between responsiveness and stability)
+latency = 0.05
+
+# ============================================================================
+# EFFECTS CONFIGURATION
+# ============================================================================
+# Real-time audio effects settings
+[effects]
+
+# Enable reverb effect
+enable_reverb = true
+
+# Enable delay effect
+enable_delay = true
+
+# Enable filter effect (EQ)
+enable_filter = true
+
+# Maximum reverb time in seconds (0.1 - 10.0)
+max_reverb_time = 3.0
+
+# ============================================================================
+# MIDI CONFIGURATION
+# ============================================================================
+# Hardware MIDI controller integration
+[midi]
+
+# Enable MIDI controller support
+enabled = false
+
+# MIDI device name (leave commented for auto-detection)
+# To see available devices:
+#   python -c "import mido; print(mido.get_input_names())"
+# device_name = "My MIDI Controller"
+
+# Automatically connect to device on application startup
+auto_connect = true
+
+# MIDI channel (1-16, typically 1)
+channel = 1
+
+# ============================================================================
+# USER INTERFACE CONFIGURATION
+# ============================================================================
+# UI appearance and behavior settings
+[ui]
+
+# Visual theme (dark, light, neon, retro)
+# - dark:   Professional dark theme (recommended for night mixing)
+# - light:  Bright daytime theme
+# - neon:   Cyberpunk aesthetic with high contrast
+# - retro:  80s/90s inspired nostalgic theme
+theme = "dark"
+
+# User interface language (language code: en, ja, es, fr, de, etc.)
+# Supported: 30+ languages (English, Japanese, Spanish, French, German,
+# Italian, Portuguese, Russian, Polish, Dutch, Swedish, Norwegian, Danish,
+# Finnish, Turkish, Greek, Hungarian, Czech, Romanian, Slovak, Korean,
+# Simplified Chinese, Traditional Chinese, Vietnamese, Thai, Indonesian,
+# Malay, Hindi, Arabic, Hebrew)
+language = "en"
+
+# Window size (minimum 800x600)
+window_width = 1200
+window_height = 800
+
+# Font size in points (8-20, default 10)
+font_size = 10
+
+# ============================================================================
+# MUSIC LIBRARY CONFIGURATION
+# ============================================================================
+# Track library and database settings
+[library]
+
+# Path to music library directory (uses ~ for home directory)
+library_path = "~/Music"
+
+# Automatically scan library on startup
+auto_scan = false
+
+# Scan subdirectories recursively
+scan_recursive = true
+
+# Supported audio formats
+supported_formats = ["wav", "flac", "mp3", "ogg"]
+
+# ============================================================================
+# ADVANCED SETTINGS
+# ============================================================================
+# Uncomment to customize:
+
+# [advanced]
+# # Multi-threaded processing
+# num_worker_threads = 4
+#
+# # Memory cache for waveforms
+# waveform_cache_size_mb = 100
+#
+# # BPM detection accuracy (0.0-1.0, higher = more accurate but slower)
+# bpm_detection_accuracy = 0.8
+#
+# # Enable performance metrics logging
+# enable_performance_monitoring = false

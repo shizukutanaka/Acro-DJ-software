@@ -1,0 +1,78 @@
+# Acro DJ Mixer Docker Compose Configuration
+#
+# Usage:
+#   docker-compose up              # Start container
+#   docker-compose down            # Stop container
+#   docker-compose logs -f         # View logs
+
+version: '3.8'
+
+services:
+  acro:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: acro-dj-mixer
+
+    # Environment
+    environment:
+      - ACRO_LOG_LEVEL=INFO
+      - ACRO_AUDIO__SAMPLE_RATE=44100
+      - ACRO_AUDIO__BUFFER_SIZE=2048
+      - ACRO_UI__THEME=dark
+      - ACRO_UI__LANGUAGE=en
+      - TZ=UTC
+
+    # Network
+    ports:
+      - "127.0.0.1:8000:8000"  # API (future)
+
+    # Storage
+    volumes:
+      # Configuration
+      - ./config/acro_config.toml:/app/config/acro_config.toml:ro
+      # Music library
+      - ./music:/app/music:ro
+      # Database and presets
+      - acro_data:/app/data
+      # Logs
+      - acro_logs:/app/logs
+
+    # Resource limits
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 512M
+        reservations:
+          cpus: '1'
+          memory: 256M
+
+    # Restart policy
+    restart: unless-stopped
+
+    # Health check
+    healthcheck:
+      test: ["CMD", "python", "-c", "from acro import __version__; print(__version__)"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 5s
+
+    # Logging
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+volumes:
+  acro_data:
+    driver: local
+  acro_logs:
+    driver: local
+
+networks:
+  default:
+    name: acro-network
+    driver: bridge

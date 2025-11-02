@@ -1,0 +1,68 @@
+repos:
+  # Ruff - Ultra-fast Python linter and formatter
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.7.4
+    hooks:
+      - id: ruff
+        name: ruff lint
+        args: [--fix]
+        stages: [commit]
+      - id: ruff-format
+        name: ruff format
+        stages: [commit]
+
+  # MyPy - Static type checking
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.11.0
+    hooks:
+      - id: mypy
+        name: mypy type check
+        additional_dependencies: [types-all]
+        args: [--ignore-missing-imports, --warn-unused-ignores]
+        stages: [commit]
+        exclude: ^tests/
+
+  # Standard pre-commit hooks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: trailing-whitespace
+        name: trim trailing whitespace
+        stages: [commit]
+      - id: end-of-file-fixer
+        name: fix end of file
+        stages: [commit]
+      - id: check-yaml
+        name: check YAML syntax
+        stages: [commit]
+      - id: check-added-large-files
+        name: check for large files
+        args: [--maxkb=1000]
+        stages: [commit]
+      - id: check-merge-conflict
+        name: check merge conflicts
+        stages: [commit]
+      - id: debug-statements
+        name: check for debug statements
+        stages: [commit]
+      - id: check-case-conflict
+        name: check for case conflicts
+        stages: [commit]
+      - id: detect-private-key
+        name: detect private keys
+        stages: [commit]
+
+  # Security checks with Bandit
+  - repo: https://github.com/PyCQA/bandit
+    rev: 1.7.8
+    hooks:
+      - id: bandit
+        name: bandit security check
+        args: [-ll, -r, --skip, B101]  # Skip assert checks
+        stages: [commit]
+        exclude: ^tests/
+
+default_language_version:
+  python: python3.8
+
+fail_fast: false

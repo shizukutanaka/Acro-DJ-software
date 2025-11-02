@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+# Copyright (c) 2024 Acro DJ Mixer Contributors
+# Licensed under the MIT License - see LICENSE file for details
+
 # -*- coding: utf-8 -*-
 """
 Minimal DJ Application - A lightweight, professional DJ mixer built with Tkinter.

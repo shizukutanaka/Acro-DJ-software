@@ -1,0 +1,34 @@
+# Include documentation files
+include README.md
+include README_V3.md
+include CONTRIBUTING.md
+include LICENSE
+include CHANGELOG.md
+
+# Include integration guides
+include INTEGRATION_GUIDE.md
+include V3_INTEGRATION_COMPLETE.md
+include SESSION_COMPLETION_REPORT.md
+include FINAL_IMPLEMENTATION_REPORT.md
+
+# Include configuration examples
+recursive-include . *.toml
+recursive-include . *.yaml
+recursive-include . *.yml
+
+# Include examples
+recursive-include examples *
+
+# Include tests
+recursive-include tests *
+
+# Include documentation source
+recursive-include docs *
+
+# Exclude unnecessary files
+global-exclude __pycache__
+global-exclude *.pyc
+global-exclude *.pyo
+global-exclude .git
+global-exclude .github
+global-exclude .venv

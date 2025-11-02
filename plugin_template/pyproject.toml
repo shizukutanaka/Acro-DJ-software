@@ -1,0 +1,125 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "my-acro-plugin"
+version = "1.0.0"
+description = "Template for Acro DJ Mixer plugins"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "Your Name", email = "you@example.com"},
+]
+keywords = ["dj", "mixer", "audio", "plugin", "acro"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: MIT License",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Multimedia :: Sound/Audio",
+    "Topic :: Multimedia :: Sound/Audio :: Mixers",
+]
+
+requires-python = ">=3.8"
+
+dependencies = [
+    "acro-dj-mixer>=2.5.0",
+    "numpy>=1.20.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+    "ruff>=0.1.0",
+    "mypy>=1.0",
+    "black>=23.0",
+]
+
+docs = [
+    "sphinx>=5.0",
+    "sphinx-rtd-theme>=1.0",
+    "myst-parser>=0.18",
+]
+
+[project.urls]
+Homepage = "https://github.com/yourusername/my-acro-plugin"
+Repository = "https://github.com/yourusername/my-acro-plugin.git"
+Documentation = "https://my-acro-plugin.readthedocs.io"
+Issues = "https://github.com/yourusername/my-acro-plugin/issues"
+
+# Plugin entry points - modify based on your plugin type
+[project.entry-points."acro.effects"]
+# my_effect = "my_plugin.effect:MyCustomEffect"
+
+[project.entry-points."acro.controllers"]
+# my_controller = "my_plugin.controller:MyCustomController"
+
+[project.entry-points."acro.visualizers"]
+# my_visualizer = "my_plugin.visualizer:MyCustomVisualizer"
+
+
+# Tool configurations
+
+[tool.ruff]
+line-length = 100
+target-version = "py38"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "N", "UP", "ANN", "BLE", "B", "A"]
+ignore = ["ANN101", "ANN102"]
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+strict = true
+disallow_incomplete_defs = true
+disallow_untyped_defs = true
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = [
+    "-v",
+    "--strict-markers",
+    "--tb=short",
+    "--cov=my_plugin",
+    "--cov-report=term-missing",
+    "--cov-report=html",
+    "--cov-report=xml",
+]
+markers = [
+    "slow: marks tests as slow",
+    "unit: unit tests",
+    "integration: integration tests",
+]
+
+[tool.coverage.run]
+source = ["my_plugin"]
+omit = [
+    "*/tests/*",
+    "*/test_*.py",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "if TYPE_CHECKING:",
+    "class .*\\bProtocol\\):",
+    "@(abc\\.)?abstractmethod",
+]
